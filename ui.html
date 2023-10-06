@@ -1,0 +1,65 @@
+<!-- https://github.com/thomas-lowry/figma-plugin-ds -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/thomas-lowry/figma-plugin-ds/dist/figma-plugin-ds.css">
+
+<style>
+  body {
+    padding: 2em;
+  }
+
+  div {
+    margin: 1em;
+  }
+
+  input {
+    display: block;
+  }
+</style>
+
+<h1>Petma plugin</h1>
+
+<div>
+
+  <label for="username">Username</label>
+  <input type="text" class="input__field" id="username" value="Your username">
+
+  <label for="name">Name</label>
+  <input type="text" class="input__field" id="name" value="Your name">
+
+  <label for="description">Description</label>
+  <input type="textarea" class="textarea" rows="3" id="description" value="Your description">
+
+</div>
+
+<div class="switch">
+  <input class="switch__toggle" type="checkbox" id="dark-mode-on">
+  <label class="switch__label" for="dark-mode-on">Dark mode</label>
+</div>
+
+<div class="radio">
+
+  <input id="radioButton1" type="radio" class="radio__button" value="1" name="variantGroup" checked>
+  <label for="radioButton1" class="radio__label">No image</label>
+
+  <input id="radioButton2" type="radio" class="radio__button" value="2" name="variantGroup">
+  <label for="radioButton2" class="radio__label">Single image</label>
+
+  <input id="radioButton3" type="radio" class="radio__button" value="3" name="variantGroup">
+  <label for="radioButton3" class="radio__label">Carousel</label>
+
+</div>
+
+<div>
+  <button class='button button--primary' id="submit-post">Submit</button>
+</div>
+
+<script>
+  document.getElementById('submit-post').onclick = () => {
+    const name = document.getElementById('name').value;
+    const username = document.getElementById('username').value;
+    const description = document.getElementById('description').value;
+    const darkModeState = document.getElementById('dark-mode-on').checked;
+    const imageVariant = document.querySelector('input[name="variantGroup"]:checked').value;
+
+    parent.postMessage({ pluginMessage: { name, username, description, darkModeState, imageVariant } }, '*')
+  }
+</script>
